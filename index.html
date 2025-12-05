@@ -10,42 +10,53 @@
   </head>
   <body>
     <div class="container">
-      <h1  <a href="/"">World Clock</h1>
+      <h1>World Clock</h1>
 
       <select id="city">
         <option value="">....Select a city....</option>
         <option value="current">My current location</option>
-         <option value="Africa/Blantyre">Lilongwe</option>
-        <option value="Europe/London">London</option>
+        <option value="Africa/Blantyre">Blantyre</option>
         <option value="America/New_York">New York</option>
         <option value="Pacific/Auckland">Auckland</option>
       </select>
 
       <div id="cities">
-      <div class="city" id="lilongwe">
-        <div>
-      <h2>Lilongwe</h2>
-      <div class="date">November 24th 2025</div>
-      </div>
-      <div class="time">10:26:16 <small>AM</small></div>
-      </div>
-      <div class="city" id="london">
-        <div>
-      <h2>London</h2>
-      <div class="date">November 24th 2025</div>
-      </div>
-      <div class="time">10:26:16 <small>AM</small></div>
-      </div>
-      </div>
+        <div class="city" data-timezone="Africa/Blantyre" id="blantyre">
+          <div>
+            <h2>Blantyre</h2>
+            <div class="date">November 24th 2025</div>
+          </div>
+          <div class="time">10:26:16 <small>AM</small></div>
+        </div>
+        <div class="city" data-timezone="America/New_York" id="new-york">
+          <div>
+            <h2>New York</h2>
+            <div class="date">November 24th 2025</div>
+          </div>
+          <div class="time">10:26:16 <small>AM</small></div>
+        </div>
+        <div class="city" data-timezone="Pacific/Auckland" id="auckland">
+          <div>
+            <h2>Auckland</h2>
+            <div class="date">November 24th 2025</div>
+          </div>
+          <div class="time">10:26:16 <small>AM</small></div>
+        </div>
       </div>
       <footer>
-        This project was coded by <strong>Demise Chipiliro Mnthambala</strong> and is open
-        sourced on
+        This project was coded by
+        <a href="https://github.com/DemiLiloDev" target="_blank">Demi</a> and is
+        open sourced on
         <a
           href="https://github.com/DemiLiloDev/World-Clock-Project"
           target="_blank"
-          >Github.</a
+          >Github</a
+        >, and is hosted on<a
+          href="https://code-craft-world-clock.netlify.app/"
+          target="_blank"
         >
+          Netlify</a
+        >.
       </footer>
       <script src="javascript/index.js"></script>
     </div>

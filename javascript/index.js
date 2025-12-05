@@ -1,41 +1,36 @@
 function updateTime() {
-  //Lilongwe
-  let lilongweElement = document.querySelector("#lilongwe");
-  if (lilongweElement) {
-    let lilongweDateElement = lilongweElement.querySelector(".date");
-    let lilongweTimeElement = lilongweElement.querySelector(".time");
-    let lilongweTime = moment().tz("Africa/Blantyre");
+  let cityElements = document.querySelectorAll(".city");
 
-    lilongweDateElement.innerHTML = lilongweTime.format("MMMM Do YYYY");
-    lilongweTimeElement.innerHTML = lilongweTime.format(
-      "h:mm:ss [<small>]A[</small>]"
-    );
-  }
+  cityElements.forEach((cityElement) => {
+    let timezone = cityElement.dataset.timezone;
+    if (timezone) {
+      let dateElement = cityElement.querySelector(".date");
+      let timeElement = cityElement.querySelector(".time");
+      let cityTime = moment().tz(timezone);
 
-  //London
-  let londonElement = document.querySelector("#london");
-  if (londonElement) {
-    let londonDateElement = londonElement.querySelector(".date");
-    let londonTimeElement = londonElement.querySelector(".time");
-    let londonTime = moment().tz("Europe/London");
-
-    londonDateElement.innerHTML = londonTime.format("MMMM Do YYYY");
-    londonTimeElement.innerHTML = londonTime.format(
-      "h:mm:ss [<small>]A[</small>]"
-    );
-  }
+      dateElement.innerHTML = cityTime.format("MMMM Do YYYY");
+      timeElement.innerHTML = cityTime.format("h:mm:ss [<small>]A[</small>]");
+    }
+  });
 }
 
 function updateCity(event) {
   let cityTimeZone = event.target.value;
+  if (cityTimeZone === "") {
+    showDefaultCities();
+    return;
+  }
+
   if (cityTimeZone === "current") {
     cityTimeZone = moment.tz.guess();
   }
+
   let cityName = cityTimeZone.replace("_", " ").split("/")[1];
   let cityTime = moment().tz(cityTimeZone);
   let citiesElement = document.querySelector("#cities");
+
   citiesElement.innerHTML = `
-    <div class="city">
+    <div class="city" data-timezone="${cityTimeZone}">
         <div>
       <h2>${cityName}</h2>
       <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
@@ -44,8 +39,43 @@ function updateCity(event) {
     "A"
   )}</small></div>
       </div>
+        <a href="/" class="back-link">← Back to all cities</a>
+  `;
+
+  document.querySelector(".back-link").addEventListener("click", function (e) {
+    e.preventDefault();
+    showDefaultCities();
+    document.querySelector("#city").value = "";
+  });
+}
+
+function showDefaultCities() {
+  let citiesElement = document.querySelector("#cities");
+  citiesElement.innerHTML = `
+    <div class="city" data-timezone="Africa/Blantyre" id="Blantyre">
+      <div>
+        <h2>Blantyre</h2>
+        <div class="date"></div>
+      </div>
+      <div class="time"></div>
+    </div>
+    <div class="city" data-timezone="America/New_York" id="new-york">
+      <div>
+        <h2>New York</h2>
+        <div class="date"></div>
+      </div>
+      <div class="time"></div>
+    </div>
+    <div class="city" data-timezone="Pacific/Auckland" id="auckland">
+      <div>
+        <h2>Auckland</h2>
+        <div class="date"></div>
+      </div>
+      <div class="time"></div>
+    </div>
   `;
 }
+
 updateTime();
 setInterval(updateTime, 1000);
 
